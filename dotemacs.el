@@ -237,8 +237,6 @@ buffer, if any, will be used."
    (forward-line 1)
    (end-of-line)))
 
-;;(define-key global-map [(control return)] 'oma-shell-exec-line)
-;;(define-key omakey-map [?\r] 'oma-shell-exec-line)
 (define-key omakey-map "j" 'oma-shell-exec-line)
 
 (defun oma-shell-exec-string (arg)
