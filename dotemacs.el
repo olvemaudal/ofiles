@@ -8,7 +8,7 @@
 ;; the most important stuff
 ;;
 
-(define-key global-map [(control j)] 'set-mark-command)
+(define-key global-map [(control l)] 'set-mark-command)
 (define-key global-map [(control h)] 'backward-delete-char-untabify)
 (define-key global-map [(control z)] 'undo)
 
@@ -114,8 +114,6 @@
 (define-key omakey-map "\C-S" '(lambda () (interactive) (oma-buffer-rotate-next "^.sh$")))
 (define-key omakey-map "\C-d" '(lambda () (interactive) (oma-buffer-rotate-prev "debug")))
 (define-key omakey-map "\C-D" '(lambda () (interactive) (oma-buffer-rotate-next "debug")))
-(define-key omakey-map "\C-m" '(lambda () (interactive) (oma-buffer-rotate-prev "[Mm]akefile\\|\\*compilation\\*")))
-(define-key omakey-map "\C-M" '(lambda () (interactive) (oma-buffer-rotate-next "[Mm]akefile\\|\\*compilation\\*")))
 
 (define-key omakey-map "\C-s" '(lambda () (interactive) (find-file-existing "~/scratchpad.txt")))
 
@@ -240,7 +238,8 @@ buffer, if any, will be used."
    (end-of-line)))
 
 ;;(define-key global-map [(control return)] 'oma-shell-exec-line)
-(define-key omakey-map [(return)] 'oma-shell-exec-line)
+;;(define-key omakey-map [?\r] 'oma-shell-exec-line)
+(define-key omakey-map "j" 'oma-shell-exec-line)
 
 (defun oma-shell-exec-string (arg)
   "Executes a given string into buffer named 1"
