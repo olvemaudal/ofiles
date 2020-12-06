@@ -3,7 +3,7 @@
 ;;
 
 ;;
-;; the most important key rebindings
+;; the most important keybindings
 ;;
 
 (global-set-key [(control z)] 'undo)
@@ -14,6 +14,9 @@
 (define-key global-map "\C-q" omakey-map)
 (define-key omakey-map "q" 'quoted-insert)
 (define-key omakey-map "h" 'help-for-help)
+
+(define-key global-map [(control o)] '(lambda () (interactive) (other-window 1)))
+(define-key global-map [(control O)] '(lambda () (interactive) (other-window -1)))
 
 ;;
 ;; set some general behaviour
@@ -90,8 +93,6 @@ vi style of % jumping to matching brace."
 
 (global-set-key [(control %)] 'goto-match-paren)
 (global-set-key [(control H)] 'help-for-help)
-(global-set-key [(control o)] '(lambda () (interactive) (other-window 1)))
-(global-set-key [(control O)] '(lambda () (interactive) (other-window -1)))
 (global-set-key [(meta control o)] '(lambda () (interactive) (other-frame 1)))
 (global-set-key [(meta control O)] '(lambda () (interactive) (other-frame -1)))
 
@@ -283,10 +284,10 @@ This function could be on `comint-output-filter-functions' or bound to a key."
 ;;        (local-set-key [(control h)] 'py-electric-backspace)))
 
 
-(setq compilation-mode-hook
-     '(lambda ()
-        (local-set-key [(control o)] '(lambda () (interactive) (other-window 1)))
-        (local-set-key [(control O)] '(lambda () (interactive) (other-window -1)))))
+;;(setq compilation-mode-hook
+;;     '(lambda ()
+;;        (local-set-key [(control o)] '(lambda () (interactive) (other-window 1)))
+;;        (local-set-key [(control O)] '(lambda () (interactive) (other-window -1)))))
 
 ;;
 ;; makefile-mode
