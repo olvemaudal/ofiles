@@ -2,15 +2,22 @@
 ;;  .emacs by olve maudal
 ;;
 
-(local-set-key [(control return)] 'eval-last-sexp)
+;;
+;; the most important key rebindings
+;;
+
+(global-set-key [(control z)] 'undo)
+(define-key global-map [(control h)] 'backward-delete-char-untabify)
+(define-key global-map [(control j)] 'set-mark-command)
+
+(setq omakey-map (make-keymap))
+(define-key global-map "\C-q" omakey-map)
+(define-key omakey-map "q" 'quoted-insert)
+(define-key omakey-map "h" 'help-for-help)
 
 ;;
 ;; set some general behaviour
 ;;
-
-(setenv "PAGER" "cat")
-;;(setenv "PATH" "/Library/Frameworks/Python.framework/Versions/3.4/bin:/opt/local/bin:/Users/oma/bin:/Users/oma/opt/bin:/Users/oma/nasm-2.09.10:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11R6/bin:/usr/texbin")
-(setenv "PYTHONIOENCODING" "utf-8")
 
 (setq progress-feedback-use-echo-area 't)
 (setq compilation-scroll-output 'nil)
@@ -39,6 +46,9 @@
 (setq inhibit-startup-message 't)
 (column-number-mode 1)
 (line-number-mode 1)
+(scroll-bar-mode -1)
+(menu-bar-mode 1)
+(tool-bar-mode 0)
 
 ;;(paren-set-mode 'sexp)
 (font-lock-mode 't)
@@ -49,11 +59,14 @@
 (setq auto-save-default 'nil)
 (setq truncate-partial-width-windows 'nil)
 (setq sentence-end-double-space 'nil)
-(setq revert-without-query '(".java"))
+;;(setq revert-without-query '(".java"))
 
-(scroll-bar-mode -1)
-(menu-bar-mode 1)
-(tool-bar-mode 0)
+;;
+;; typical environvent variables
+;;
+
+(setenv "PAGER" "cat")
+(setenv "PYTHONIOENCODING" "utf-8")
 
 ;;
 ;; program some global keys
@@ -67,11 +80,13 @@ vi style of % jumping to matching brace."
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
 
-;;(global-unset-key [(control z)])
 
-(define-key global-map [(control h)] 'backward-delete-char-untabify)
+;;(local-set-key 
+
 
 (global-set-key [(meta g)] 'goto-line)
+
+
 
 (global-set-key [(control %)] 'goto-match-paren)
 (global-set-key [(control H)] 'help-for-help)
@@ -86,12 +101,11 @@ vi style of % jumping to matching brace."
 (global-set-key [(control P)] '(lambda () (interactive) (scroll-down 1) (previous-line 1)))
 
 (define-key global-map '[(control \.)] 'call-last-kbd-macro)
-(define-key global-map '[(control \,)] 'hippie-expand)
-(define-key global-map '[(control \;)] 'hippie-expand)
-
-(setq omakey-map (make-keymap))
-(define-key global-map "\C-q" omakey-map)
-(define-key omakey-map "q"    'quoted-insert)
+;;(define-key global-map '[(control \,)] 'set-mark-command)
+;;(define-key global-map '[(control \;)] 'eval-last-sexp)
+;;(define-key global-map '[(control m)] 'set-mark-command) ;;; since ctrl-space does not work in wt
+(define-key omakey-map [(space)] 'set-mark-command)
+;;(define-key omakey-map [(return)] 'eval-last-sexp)
 (define-key omakey-map "l"    'font-lock-mode)
 ;;(define-key omakey-map "L"    'hi-lock-face-buffer)
 (define-key omakey-map "L"    'linum-mode)
@@ -101,12 +115,12 @@ vi style of % jumping to matching brace."
 (define-key omakey-map "o"    'overwrite-mode)
 (define-key omakey-map "r"    'query-replace-regexp)
 (define-key omakey-map "\C-v" 'ff-find-other-file)
-;;(define-key omakey-map "m"    'manual-entry)
+;;(define-key omakey-map "m"    'set-mark-command)
 (define-key omakey-map "\C-t" 'oma-toggle-tab-width)
-(define-key omakey-map "\C-o" 'oma-toggle-basic-offset)
-(define-key omakey-map "u"    'oma-untabify-buffer)
-(define-key omakey-map "n"    'next-error)
-(define-key omakey-map "f"    'my-find-file-at-point-with-line)
+;;(define-key omakey-map "\C-o" 'oma-toggle-basic-offset)
+;;(define-key omakey-map "u"    'oma-untabify-buffer)
+;;(define-key omakey-map "n"    'next-error)
+;;(define-key omakey-map "f"    'my-find-file-at-point-with-line)
 (define-key omakey-map "v"    'set-variable)
 (define-key omakey-map "w"    'whitespace-mode)
 (define-key omakey-map "?"    'manual-entry)
@@ -117,7 +131,7 @@ vi style of % jumping to matching brace."
 (define-key omakey-map "c"    'compile)
 ;;(define-key omakey-map "c"    'oma-shell-exec-string)
 ;;(define-key omakey-map "\C-c" '(lambda() (interactive) (save-buffer) (shell-command "cd /home/olvmauda/cpptour; c++ tour.cpp && ./a.out")))
-(define-key omakey-map "\C-n" 'next-error)
+;;(define-key omakey-map "\C-n" 'next-error)
 (define-key omakey-map "." 'my-browse-url)
 
 (defun my-browse-url ()
@@ -255,8 +269,7 @@ This function could be on `comint-output-filter-functions' or bound to a key."
 (setq emacs-lisp-mode-hook
      '(lambda ()
         (font-lock-mode 't)
-        (local-set-key [(return)] 'newline-and-indent)
-        (local-set-key [(control return)] 'eval-last-sexp)))
+        (local-set-key [(return)] 'newline-and-indent)))
 
 (setq perl-mode-hook
      '(lambda ()
