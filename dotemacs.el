@@ -57,6 +57,14 @@
 (setenv "PAGER" "cat")
 
 ;;
+;; Set default fonts
+;;
+
+(if (equal system-type 'windows-nt)
+    (custom-set-faces
+     '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 98 :width normal))))))
+
+;;
 ;; oma keys (after C-q)
 ;;
 
@@ -1509,3 +1517,4 @@ buffer, if any, will be used."
 ;;(set-default-font "-misc-fixed-medium-r-normal--13-120-75-75-c-70-iso8859-1")
 
 (message ".emacs completed")
+
