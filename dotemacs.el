@@ -6,9 +6,9 @@
 ;; the most important keybindings
 ;;
 
-(global-set-key [(control z)] 'undo)
-(define-key global-map [(control h)] 'backward-delete-char-untabify)
 (define-key global-map [(control j)] 'set-mark-command)
+(define-key global-map [(control h)] 'backward-delete-char-untabify)
+(define-key global-map [(control z)] 'undo)
 
 (setq omakey-map (make-keymap))
 (define-key global-map "\C-q" omakey-map)
@@ -22,46 +22,47 @@
 ;; set some general behaviour
 ;;
 
-(setq progress-feedback-use-echo-area 't)
-(setq compilation-scroll-output 'nil)
-(setq compilation-scroll-output 't)
-(setq compilation-always-kill 't)
-(setq compilation-window-height 5)
-(setq split-width-threshold 20)
-(setq split-height-threshold 300)
-;;(setq split-width-threshold 200)
-(setq split-height-threshold 30)
-(setq display-buffer-alist '(("[0-9]" display-buffer-same-window)))
-      
-;;(menu-bar-mode)
-;;(set-specifier menubar-visible-p 't)
-;;(set-specifier default-toolbar-visible-p 't)
-
-;;(set-specifier menubar-visible-p 'nil)
-;;(set-specifier default-toolbar-visible-p 'nil)
-;;(custom-set-variables
-;; '(gutter-buffers-tab-visible-p 'nil)
-;; '(scrollbars-visible-p 't)
-;; '(modeline-3d-p 'nil))
-
-(set-face-attribute 'mode-line nil :box nil)
-
-(setq inhibit-startup-message 't)
-(column-number-mode 1)
-(line-number-mode 1)
-(scroll-bar-mode -1)
-(menu-bar-mode 1)
-(tool-bar-mode 0)
-
-;;(paren-set-mode 'sexp)
-(font-lock-mode 't)
-(setq load-home-init-file 't)
-(setq-default indent-tabs-mode 'nil)
-(setq indent-tabs-mode 'nil)
 (setq make-backup-files 'nil)
 (setq auto-save-default 'nil)
-(setq truncate-partial-width-windows 'nil)
 (setq sentence-end-double-space 'nil)
+(column-number-mode 1)
+(line-number-mode 1)
+
+;(setq progress-feedback-use-echo-area 't)
+;(setq compilation-scroll-output 'nil)
+;(setq compilation-scroll-output 't)
+;(setq compilation-always-kill 't)
+;(setq compilation-window-height 5)
+;(setq split-width-threshold 20)
+;(setq split-height-threshold 300)
+;(setq split-width-threshold 200)
+;(setq split-height-threshold 30)
+;(setq display-buffer-alist '(("[0-9]" display-buffer-same-window)))
+      
+;(menu-bar-mode)
+;(set-specifier menubar-visible-p 't)
+;(set-specifier default-toolbar-visible-p 't)
+
+;(set-specifier menubar-visible-p 'nil)
+;(set-specifier default-toolbar-visible-p 'nil)
+;(custom-set-variables
+; '(gutter-buffers-tab-visible-p 'nil)
+; '(scrollbars-visible-p 't)
+; '(modeline-3d-p 'nil))
+
+;(set-face-attribute 'mode-line nil :box nil)
+
+;(setq inhibit-startup-message 't)
+;(scroll-bar-mode -1)
+;(menu-bar-mode 1)
+;(tool-bar-mode 0)
+
+;(paren-set-mode 'sexp)
+;(font-lock-mode 't)
+;(setq load-home-init-file 't)
+;(setq-default indent-tabs-mode 'nil)
+;(setq indent-tabs-mode 'nil)
+;(setq truncate-partial-width-windows 'nil)
 ;;(setq revert-without-query '(".java"))
 
 ;;
@@ -69,62 +70,34 @@
 ;;
 
 (setenv "PAGER" "cat")
-(setenv "PYTHONIOENCODING" "utf-8")
+;(setenv "PYTHONIOENCODING" "utf-8")
 
 ;;
 ;; program some global keys
 ;;
 
-(defun goto-match-paren (arg)
-  "Go to the matching parenthesis if on parenthesis, otherwise insert %.
-vi style of % jumping to matching brace."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
+;(global-set-key [(meta control o)] '(lambda () (interactive) (other-frame 1)))
+;(global-set-key [(meta control O)] '(lambda () (interactive) (other-frame -1)))
 
+;(global-set-key [(control W)] 'delete-region)
 
-;;(local-set-key 
+;(global-set-key [(control N)] '(lambda () (interactive) (scroll-up 1) (next-line 1)))
+;(global-set-key [(control P)] '(lambda () (interactive) (scroll-down 1) (previous-line 1)))
 
+;(define-key global-map '[(control \.)] 'call-last-kbd-macro) ; does not work in WT
 
-(global-set-key [(meta g)] 'goto-line)
-
-
-
-(global-set-key [(control %)] 'goto-match-paren)
-(global-set-key [(control H)] 'help-for-help)
-(global-set-key [(meta control o)] '(lambda () (interactive) (other-frame 1)))
-(global-set-key [(meta control O)] '(lambda () (interactive) (other-frame -1)))
-
-(global-set-key [(control W)] 'delete-region)
-
-(global-set-key [(control N)] '(lambda () (interactive) (scroll-up 1) (next-line 1)))
-(global-set-key [(control P)] '(lambda () (interactive) (scroll-down 1) (previous-line 1)))
-
-(define-key global-map '[(control \.)] 'call-last-kbd-macro)
-;;(define-key global-map '[(control \,)] 'set-mark-command)
-;;(define-key global-map '[(control \;)] 'eval-last-sexp)
-;;(define-key global-map '[(control m)] 'set-mark-command) ;;; since ctrl-space does not work in wt
-(define-key omakey-map [(space)] 'set-mark-command)
-;;(define-key omakey-map [(return)] 'eval-last-sexp)
 (define-key omakey-map "l"    'font-lock-mode)
-;;(define-key omakey-map "L"    'hi-lock-face-buffer)
-(define-key omakey-map "L"    'linum-mode)
+(define-key omakey-map "L"    'hi-lock-face-buffer)
 (define-key omakey-map "d"    '(lambda() (interactive) (message default-directory)))
 (define-key omakey-map "s"    'search-forward-regexp)
-(define-key omakey-map "b"    'rename-buffer)
-(define-key omakey-map "o"    'overwrite-mode)
 (define-key omakey-map "r"    'query-replace-regexp)
+(define-key omakey-map "b"    'rename-buffer)
 (define-key omakey-map "\C-v" 'ff-find-other-file)
-;;(define-key omakey-map "m"    'set-mark-command)
 (define-key omakey-map "\C-t" 'oma-toggle-tab-width)
 ;;(define-key omakey-map "\C-o" 'oma-toggle-basic-offset)
-;;(define-key omakey-map "u"    'oma-untabify-buffer)
-;;(define-key omakey-map "n"    'next-error)
 ;;(define-key omakey-map "f"    'my-find-file-at-point-with-line)
 (define-key omakey-map "v"    'set-variable)
 (define-key omakey-map "w"    'whitespace-mode)
-(define-key omakey-map "?"    'manual-entry)
 ;;(define-key omakey-map "="    '(insert "::printf(### %s %s:%d\n", __PRETTY_FUNCTION__, __FILE__, __LINE__)"))
 (define-key omakey-map "t"    '(lambda() (interactive) (setq truncate-lines (if (eval truncate-lines) (eval nil) (eval 1) )) (redraw-display)))
 (define-key omakey-map "\C-x\C-w" 'write-region)
@@ -133,34 +106,34 @@ vi style of % jumping to matching brace."
 ;;(define-key omakey-map "c"    'oma-shell-exec-string)
 ;;(define-key omakey-map "\C-c" '(lambda() (interactive) (save-buffer) (shell-command "cd /home/olvmauda/cpptour; c++ tour.cpp && ./a.out")))
 ;;(define-key omakey-map "\C-n" 'next-error)
-(define-key omakey-map "." 'my-browse-url)
 
-(defun my-browse-url ()
-  (interactive)
-  (if (string-match "^[a-f0-9]*$" (thing-at-point 'word))
-      (browse-url (concat "https://bitbucket-eng-gpk1.cisco.com/bitbucket/projects/ITVM/repos/testcode/commits/" (thing-at-point 'word)))))
-      ;;(browse-url (concat "http://lys-review.cisco.com/rM" (thing-at-point 'word)))))
-;;(browse-url (concat "http://lys-critic.cisco.com/system-trunk-main/" (thing-at-point 'word)))))
-;;https://bitbucket-eng-gpk1.cisco.com/bitbucket/projects/ITVM/repos/testcode/commits/d86b1eef48c1377e876806de6db17f4a54541ad8
+;(define-key omakey-map "." 'my-browse-url)
+;(defun my-browse-url ()
+;  (interactive)
+;  (if (string-match "^[a-f0-9]*$" (thing-at-point 'word))
+;      (browse-url (concat "https://bitbucket-eng-gpk1.cisco.com/bitbucket/projects/ITVM/repos/testcode/commits/" (thing-at-point 'word)))))
+;      ;;(browse-url (concat "http://lys-review.cisco.com/rM" (thing-at-point 'word)))))
+;;;(browse-url (concat "http://lys-critic.cisco.com/system-trunk-main/" (thing-at-point 'word)))))
+;;;https://bitbucket-eng-gpk1.cisco.com/bitbucket/projects/ITVM/repos/testcode/commits/d86b1eef48c1377e876806de6db17f4a54541ad8
 
-(defun save-interrupt-and-compile ()
-  "Save files, Interrupt old compilation, if any, and recompile."
-  (interactive)
-  (save-buffer)
-  (ignore-errors 
-    (process-kill-without-query 
-      (get-buffer-process
-        (get-buffer "*compilation*"))))
-  (ignore-errors 
-    (kill-buffer "*compilation*"))
-  (recompile)
-)
+;(defun save-interrupt-and-compile ()
+;  "Save files, Interrupt old compilation, if any, and recompile."
+;  (interactive)
+;  (save-buffer)
+;  (ignore-errors 
+;    (process-kill-without-query 
+;      (get-buffer-process
+;        (get-buffer "*compilation*"))))
+;  (ignore-errors 
+;    (kill-buffer "*compilation*"))
+;  (recompile)
+;)
 
-(defun oma-save-and-recompile ()
- "Save current buffer and recompile"
- (interactive)
- (save-buffer)
- (recompile))
+;(defun oma-save-and-recompile ()
+; "Save current buffer and recompile"
+; (interactive)
+; (save-buffer)
+; (recompile))
 
 ;;
 ;; oma-strip-ctrl-h
@@ -168,19 +141,19 @@ vi style of % jumping to matching brace."
 ;; Useful for removing annoying BS characters from the output of fex man pages.
 ;;
 
-(defun oma-strip-ctrl-h (&optional string)
- "Strip trailing `^H' characters from the current output group.
-This function could be on `comint-output-filter-functions' or bound to a key."
- (interactive)
- (let ((pmark (process-mark (get-buffer-process (current-buffer))))
-	(pos (if (interactive-p) 
-		  comint-last-input-end 
-		comint-last-output-start)))
-   (if (marker-position pos)
-	(save-excursion
-	  (goto-char pos)
-	  (while (re-search-forward ".\b" pmark t)
-	    (replace-match "" t t))))))
+;(defun oma-strip-ctrl-h (&optional string)
+; "Strip trailing `^H' characters from the current output group.
+;This function could be on `comint-output-filter-functions' or bound to a key."
+; (interactive)
+; (let ((pmark (process-mark (get-buffer-process (current-buffer))))
+;	(pos (if (interactive-p) 
+;		  comint-last-input-end 
+;		comint-last-output-start)))
+;   (if (marker-position pos)
+;	(save-excursion
+;	  (goto-char pos)
+;	  (while (re-search-forward ".\b" pmark t)
+;	    (replace-match "" t t))))))
 
 ;; 
 ;; oma-toggle-tab-width
@@ -244,8 +217,8 @@ This function could be on `comint-output-filter-functions' or bound to a key."
 (define-key omakey-map "\C-P" '(lambda () (interactive) (oma-buffer-rotate-next "Python\\|Perl")))
 (define-key omakey-map "\C-c" '(lambda () (interactive) (oma-buffer-rotate-prev "^C/\\|^C\\+\\+/")))
 (define-key omakey-map "\C-C" '(lambda () (interactive) (oma-buffer-rotate-next "^C/\\|^C\\+\\+/")))
-(define-key omakey-map "\C-s" '(lambda () (interactive) (oma-buffer-rotate-prev "^nasm")))
-(define-key omakey-map "\C-S" '(lambda () (interactive) (oma-buffer-rotate-next "^nasm")))
+(define-key omakey-map "\C-s" '(lambda () (interactive) (oma-buffer-rotate-prev "^.sh$")))
+(define-key omakey-map "\C-S" '(lambda () (interactive) (oma-buffer-rotate-next "^.sh$")))
 (define-key omakey-map "\C-d" '(lambda () (interactive) (oma-buffer-rotate-prev "debug")))
 (define-key omakey-map "\C-D" '(lambda () (interactive) (oma-buffer-rotate-next "debug")))
 (define-key omakey-map "\C-m" '(lambda () (interactive) (oma-buffer-rotate-prev "[Mm]akefile\\|\\*compilation\\*")))
@@ -262,6 +235,19 @@ This function could be on `comint-output-filter-functions' or bound to a key."
 
 ;;(define-key omakey-map "\C-s" '(lambda () (interactive) (find-file-existing "~/scratchpad.txt")))
 
+
+;;
+;; goto-match-paren
+;; 
+
+(defun goto-match-paren (arg)
+  "Go to the matching parenthesis if on parenthesis, otherwise insert %.
+vi style of % jumping to matching brace."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
+(define-key omakey-map "%" 'goto-match-paren)
 
 ;;
 ;; elisp-mode
