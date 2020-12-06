@@ -26,6 +26,7 @@
 ;;
 
 (define-key global-map (kbd "C-SPC") 'nil)
+(define-key global-map (kbd "C-@") 'nil)
 (define-key global-map [(control l)] 'set-mark-command)
 
 ;;
