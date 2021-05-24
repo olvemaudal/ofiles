@@ -174,8 +174,10 @@ vi style of % jumping to matching brace."
         (setq comint-input-ring-size 1024)
         ;;(setq comint-output-filter-functions '(ansi-color-process-output comint-strip-ctrl-m oma-strip-ctrl-h comint-postoutput-scroll-to-bottom comint-watch-for-password-prompt))
 	;;(setq explicit-shell-file-name '"/bin/bash")
+	(setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
         (local-set-key [(meta p)] 'comint-previous-matching-input-from-input)
         (local-set-key [(meta n)] 'comint-next-matching-input-from-input)))
+
 
 (if (equal system-type 'windows-nt)
    (progn
@@ -198,9 +200,19 @@ vi style of % jumping to matching brace."
 (define-key omakey-map "9" '(lambda (arg) (interactive "P") (oma-shell "9" arg)))
 (define-key omakey-map "0" '(lambda (arg) (interactive "P") (oma-shell "0" arg)))
 
+;;(defun oma-shell (name arg)
+;;  (interactive)
+;;  (shell name))
+
 (defun oma-shell (name arg)
-  (interactive)
-  (shell name))
+ (interactive)
+ (if (oma-buffer-exist-p name)
+     (switch-to-buffer name)
+   (setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
+   (setq ansi-color-for-comint-mode 't)
+   (setq shell-font-lock-keywords 'nil)
+   (shell)
+   (rename-buffer name)))
 
 (defvar oma-shell-exec-target 'nil "*Target buffer for oma-shell-exec-line")
 (defun oma-shell-exec-line (arg)
@@ -627,15 +639,6 @@ buffer, if any, will be used."
 ;;
 ;; pterm -title "A tour of Modern C++" --display :0 -geometry 40x25+1200+250 -fn "monospace 18" -e 'c++ tour.cpp && ./a.out; read'
 ;;
-;;(defun oma-shell (name arg)
-;; (interactive)
-;; (if (oma-buffer-exist-p name)
-;;     (switch-to-buffer name)
-;;   (setq explicit-shell-file-name (and arg "C:/cygwin/bin/bash"))
-;;   (setq ansi-color-for-comint-mode 't)
-;;   (setq shell-font-lock-keywords 'nil)
-;;   (shell)
-;;   (rename-buffer name)))
 ;;
 ;;(defun oma-shell (name arg)
 ;; (interactive)
