@@ -26,6 +26,7 @@
 ;;
 
 (define-key global-map (kbd "C-SPC") 'nil)
+(define-key global-map (kbd "C-@") 'nil)
 (define-key global-map [(control l)] 'set-mark-command)
 
 ;;
@@ -34,6 +35,13 @@
 
 (define-key global-map [(control h)] 'backward-delete-char-untabify)
 (define-key omakey-map "h" 'help-for-help)
+
+;;
+;; Redefine C-o
+;;
+
+(define-key global-map (kbd "C-o") '(lambda () (interactive) (other-window 1)))
+(define-key global-map (kbd "C-O") '(lambda () (interactive) (other-window -1)))
 
 ;;
 ;; who needs to to suspend emacs? C-z is a nice key for undo
