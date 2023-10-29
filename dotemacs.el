@@ -1,5 +1,5 @@
 ;;
-;; .emacs, olve maudal (Dec 2020)
+;; .emacs, olve maudal (Nov 2023)
 ;;
 
 (setq inhibit-startup-screen 't)
@@ -7,9 +7,11 @@
 (setq make-backup-files 'nil)
 (setq auto-save-default 'nil)
 (setq sentence-end-double-space 'nil)
+;;(setq visible-bell 't)
+(setq x-alt-keysym 'meta)
 (column-number-mode 1)
 (line-number-mode 1)
-(menu-bar-mode 1)
+(menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode -1)
 
@@ -25,9 +27,9 @@
 ;; rebind set mark to C-l because C-Space often does not work (eg wt)
 ;;
 
-(define-key global-map (kbd "C-SPC") 'nil)
-(define-key global-map (kbd "C-@") 'nil)
-(define-key global-map [(control l)] 'set-mark-command)
+;;(define-key global-map (kbd "C-SPC") 'nil)
+;;(define-key global-map (kbd "C-@") 'nil)
+;;(define-key global-map [(control l)] 'set-mark-command)
 
 ;;
 ;; C-h is my backspace. Rebind help to C-q h instead
@@ -181,8 +183,8 @@ vi style of % jumping to matching brace."
      '(lambda ()
         (setq comint-input-ring-size 1024)
         ;;(setq comint-output-filter-functions '(ansi-color-process-output comint-strip-ctrl-m oma-strip-ctrl-h comint-postoutput-scroll-to-bottom comint-watch-for-password-prompt))
-	;;(setq explicit-shell-file-name '"/bin/bash")
-	(setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
+	(setq explicit-shell-file-name '"/bin/bash")
+	;;(setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
         (local-set-key [(meta p)] 'comint-previous-matching-input-from-input)
         (local-set-key [(meta n)] 'comint-next-matching-input-from-input)))
 
@@ -216,7 +218,8 @@ vi style of % jumping to matching brace."
  (interactive)
  (if (oma-buffer-exist-p name)
      (switch-to-buffer name)
-   (setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
+   (setq explicit-shell-file-name '"/bin/bash")
+   ;;(setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
    (setq ansi-color-for-comint-mode 't)
    (setq shell-font-lock-keywords 'nil)
    (shell)
