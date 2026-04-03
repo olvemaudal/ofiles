@@ -310,27 +310,21 @@ buffer, if any, will be used."
 ;;(add-to-list 'exec-path "/opt/homebrew/sbin")
 ;;(setenv "PATH" (concat "/opt/homebrew/bin:/opt/homebrew/sbin:" (getenv "PATH")))
 
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+;;
+;; Install vterm (might need "brew install libvterm cmake")
+;;
+
+;; (require 'package)
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; (package-initialize)
 
 (use-package vterm
   :ensure t
   :custom
   (vterm-always-compile-module t))
 
+;;
+;; Done
+;;
+
 (message ".emacs completed")
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(eat minimap vterm)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
