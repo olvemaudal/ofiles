@@ -356,6 +356,17 @@ buffer, if any, will be used."
   "C-b"    #'shrink-window-horizontally)
 
 (repeat-mode 1)
+
+(setq frame-title-format
+      '(:eval
+        (concat
+         (cond
+          (buffer-file-name (abbreviate-file-name buffer-file-name))
+          ((derived-mode-p 'vterm-mode 'shell-mode 'eshell-mode 'term-mode 'eat-mode)
+           (abbreviate-file-name default-directory))
+          (t "%b"))
+         (if (and buffer-file-name (buffer-modified-p)) " •" ""))))
+
 (global-set-key (kbd "C-<tab>")  #'hippie-expand)
 
 (use-package magit
