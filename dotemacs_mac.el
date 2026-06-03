@@ -1,5 +1,5 @@
 ;;
-;; .emacs, Olve Maudal (Apr 2026, Mac setup)
+;; .emacs, Olve Maudal (Mac setup)
 ;;
 
 (setq inhibit-startup-screen t)
