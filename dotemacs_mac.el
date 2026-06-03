@@ -356,6 +356,8 @@ buffer, if any, will be used."
   "C-b"    #'shrink-window-horizontally)
 
 (repeat-mode 1)
+(global-set-key (kbd "C-<tab>")  #'hippie-expand)
+
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status))
