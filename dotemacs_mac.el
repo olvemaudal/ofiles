@@ -343,6 +343,9 @@ buffer, if any, will be used."
                     :height 0.9
                     :box nil)
 
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
 
 ;;
 ;; Done
