@@ -12,7 +12,8 @@
 (line-number-mode 1)
 (menu-bar-mode 1)
 (tool-bar-mode -1)
-(scroll-bar-mode 1)
+(scroll-bar-mode -1)
+(size-indication-mode -1)
 
 ;;
 ;; System specific setups
@@ -322,6 +323,12 @@ buffer, if any, will be used."
   :ensure t
   :custom
   (vterm-always-compile-module t))
+(fringe-mode '(1 . 1))
+(set-face-attribute 'mode-line nil
+		    :family "Helvetica"
+                    :height 0.9
+                    :box nil)
+
 
 ;;
 ;; Done
