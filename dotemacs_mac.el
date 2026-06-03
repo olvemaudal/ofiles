@@ -64,7 +64,7 @@
 ;;
 
 (global-set-key (kbd "C-ø") (lambda () (interactive) (other-window 1)))
-(global-set-key (kbd "C-S-ø") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "C-Ø") (lambda () (interactive) (other-window -1)))
 
 ;;
 ;; bind C-x C-r to open recent files (and increase recent files to 50)
