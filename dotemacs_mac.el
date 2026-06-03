@@ -99,7 +99,7 @@
 ;; fix PAGER, when running shell, we do not want *less* or something similar
 ;;
 
-(setenv "PAGER" "cat")
+;;(setenv "PAGER" "cat")
 
 ;;
 ;; Navigate between buffers
@@ -189,9 +189,10 @@ vi style of % jumping to matching brace."
      (switch-to-buffer name)
    (setq explicit-shell-file-name '"/bin/zsh")
    ;;(setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
-   (setq ansi-color-for-comint-mode 't)
-   (setq shell-font-lock-keywords 'nil)
-   (shell)
+   ;;(setq ansi-color-for-comint-mode 't)
+   ;;(setq shell-font-lock-keywords 'nil)
+   ;;(shell)
+   (vterm)
    (rename-buffer name)))
 
 (defvar oma-shell-exec-target 'nil "*Target buffer for oma-shell-exec-line")
@@ -321,8 +322,21 @@ buffer, if any, will be used."
 
 (use-package vterm
   :ensure t
+  :commands (vterm vterm-other-window)
   :custom
-  (vterm-always-compile-module t))
+  (vterm-always-compile-module t)
+  
+  ;;(setopt vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-y" "M-y" "C-q"))
+  (vterm-max-scrollback 100000)     ; default is 1000; bump it
+  (vterm-kill-buffer-on-exit t)     ; close the buffer when the shell exits
+  (vterm-copy-exclude-prompt t)     ; RET-copy in copy-mode skips the prompt
+  (keymap-unset vterm-mode-map "C-q" t)
+  :bind
+  (:map vterm-mode-map
+        ;; vterm-send-next-key is unbound by default — give it a home so you
+        ;; can punch a literal C-c / C-x / etc. through to a nested program
+        ("C-c C-q" . vterm-send-next-key)))
+
 (fringe-mode '(1 . 1))
 (set-face-attribute 'mode-line nil
 		    :family "Helvetica"
