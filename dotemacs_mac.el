@@ -20,7 +20,7 @@
 ;;
 
 (when (eq system-type 'darwin)
-  (set-face-attribute 'default nil :family "Menlo" :height 180)
+  (set-face-attribute 'default nil :family "Menlo" :height 140)
   (setq mac-option-modifier 'meta)         ;; M-x is then left option key
   (setq mac-right-option-modifier 'none)   ;; special keys can still be reached with right option
   (global-set-key (kbd "s-C-f") 'toggle-frame-fullscreen)
