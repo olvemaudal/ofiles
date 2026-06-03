@@ -343,6 +343,19 @@ buffer, if any, will be used."
                     :height 0.9
                     :box nil)
 
+(global-set-key (kbd "C-q C-p")  #'enlarge-window)
+(global-set-key (kbd "C-q C-n")  #'shrink-window)
+(global-set-key (kbd "C-q C-f")  #'enlarge-window-horizontally)
+(global-set-key (kbd "C-q C-b")  #'shrink-window-horizontally)
+
+(defvar-keymap my/resize-repeat-map
+  :repeat t
+  "C-p"    #'enlarge-window
+  "C-n"    #'shrink-window
+  "C-f"    #'enlarge-window-horizontally
+  "C-b"    #'shrink-window-horizontally)
+
+(repeat-mode 1)
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status))
