@@ -220,7 +220,7 @@ buffer, if any, will be used."
    (end-of-line)))
 
 (define-key omakey-map "j" 'oma-shell-exec-line)
-(global-set-key (kbd "C-æ") #'oma-shell-exec-line)
+(global-set-key (kbd "C-<return>") 'oma-shell-exec-line)
 
 (defun oma-shell-exec-string (arg)
   "Executes a given string into buffer named 1"
