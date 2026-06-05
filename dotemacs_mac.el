@@ -88,6 +88,7 @@
 (define-key omakey-map "\C-v"     #'ff-find-other-file)
 (define-key omakey-map "v"        #'set-variable)
 (define-key omakey-map "w"        #'whitespace-mode)
+(define-key omakey-map "n"        #'display-line-numbers-mode)
 (define-key omakey-map "t"        (lambda () (interactive) (setq truncate-lines (not truncate-lines)) (redraw-display)))
 (define-key omakey-map "\C-x\C-w" #'write-region)
 (define-key omakey-map "\C-k"     (lambda () (interactive) (kill-buffer (current-buffer))))
@@ -386,3 +387,4 @@ buffer, if any, will be used."
 ;;
 
 (message ".emacs completed")
+
