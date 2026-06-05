@@ -344,18 +344,25 @@ buffer, if any, will be used."
                     :height 0.9
                     :box nil)
 
-(global-set-key (kbd "C-q C-p")  #'enlarge-window)
-(global-set-key (kbd "C-q C-n")  #'shrink-window)
-(global-set-key (kbd "C-q C-f")  #'enlarge-window-horizontally)
-(global-set-key (kbd "C-q C-b")  #'shrink-window-horizontally)
 
 (defvar-keymap my/resize-repeat-map
   :repeat t
-  "C-p"    #'enlarge-window
-  "C-n"    #'shrink-window
-  "C-f"    #'enlarge-window-horizontally
-  "C-b"    #'shrink-window-horizontally)
+  "C-p" #'enlarge-window
+  "C-n" #'shrink-window
+  "C-f" #'enlarge-window-horizontally
+  "C-b" #'shrink-window-horizontally
+  "p"   #'windmove-swap-states-up
+  "n"   #'windmove-swap-states-down
+  "f"   #'windmove-swap-states-right
+  "b"   #'windmove-swap-states-left)
 
+(defun my/resize-windows ()
+  "Enter the window resize/swap repeat state."
+  (interactive)
+  (message "Resize C-p/C-n/C-f/C-b · Swap p/n/f/b")
+  (set-transient-map my/resize-repeat-map t))
+
+(global-set-key (kbd "C-q C-w") #'my/resize-windows)
 (repeat-mode 1)
 
 (setq frame-title-format
