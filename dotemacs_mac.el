@@ -327,15 +327,16 @@ buffer, if any, will be used."
   (vterm-always-compile-module t)
   
   ;;(setopt vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-y" "M-y" "C-q"))
-  (vterm-max-scrollback 100000)     ; default is 1000; bump it
-  (vterm-kill-buffer-on-exit t)     ; close the buffer when the shell exits
-  (vterm-copy-exclude-prompt t)     ; RET-copy in copy-mode skips the prompt
-  (keymap-unset vterm-mode-map "C-q" t)
+  (vterm-max-scrollback 100000)
+  (vterm-kill-buffer-on-exit t)
+  (vterm-copy-exclude-prompt t)
   :bind
   (:map vterm-mode-map
-        ;; vterm-send-next-key is unbound by default — give it a home so you
-        ;; can punch a literal C-c / C-x / etc. through to a nested program
         ("C-c C-q" . vterm-send-next-key)))
+
+(with-eval-after-load 'vterm
+  (keymap-unset vterm-mode-map "C-q" t)
+  (define-key vterm-mode-map (kbd "C-h") #'vterm-send-backspace))
 
 (fringe-mode '(1 . 1))
 (set-face-attribute 'mode-line nil
