@@ -8,6 +8,7 @@
 (setq auto-save-default nil)
 (setq sentence-end-double-space nil)
 (setq visible-bell nil)
+(setq vc-follow-symlinks t)
 (column-number-mode 1)
 (line-number-mode 1)
 (menu-bar-mode 1)
