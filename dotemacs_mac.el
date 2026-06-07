@@ -9,12 +9,15 @@
 (setq sentence-end-double-space nil)
 (setq visible-bell nil)
 (setq vc-follow-symlinks t)
+(setq ring-bell-function 'ignore)
 (column-number-mode 1)
 (line-number-mode 1)
 (menu-bar-mode 1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (size-indication-mode -1)
+
+(define-key emacs-lisp-mode-map (kbd "C-<return>") 'eval-last-sexp)
 
 ;;
 ;; System specific setups
@@ -295,9 +298,8 @@ buffer, if any, will be used."
 ;; final stuff
 ;;
 
-(define-key emacs-lisp-mode-map (kbd "C-<return>") 'eval-last-sexp)
 
-(setq ring-bell-function 'ignore)
+
 
 (defun myssh (host)
   (interactive "sHost: ")
