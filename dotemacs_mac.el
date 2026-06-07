@@ -324,6 +324,17 @@ buffer, if any, will be used."
 ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; (package-initialize)
 
+
+;; to compile and install packages you might want to consider:
+;;    xcode-select --install      
+;;    brew install cmake libtool  
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
 (use-package vterm
   :ensure t
   :commands (vterm vterm-other-window)
