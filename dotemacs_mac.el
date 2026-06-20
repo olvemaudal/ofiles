@@ -14,7 +14,7 @@
 (line-number-mode 1)
 (menu-bar-mode 1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode 1)
 (size-indication-mode -1)
 
 (define-key emacs-lisp-mode-map (kbd "C-<return>") 'eval-last-sexp)
@@ -192,7 +192,7 @@ vi style of % jumping to matching brace."
  (interactive)
  (if (oma-buffer-exist-p name)
      (switch-to-buffer name)
-   (setq explicit-shell-file-name '"/bin/zsh")
+   ;;(setq explicit-shell-file-name '"/bin/zsh")
    ;;(setq explicit-shell-file-name '"C:/Program Files/Git/bin/bash.exe")
    ;;(setq ansi-color-for-comint-mode 't)
    ;;(setq shell-font-lock-keywords 'nil)
@@ -215,7 +215,7 @@ buffer, if any, will be used."
      (setq beg (point))
      (end-of-line)
      (setq end (point))
-     (let ((cmd (buffer-substring beg end)) (curbuf (current-buffer)))
+     (let ((cmd (string-trim (buffer-substring beg end))) (curbuf (current-buffer)))
        (switch-to-buffer-other-window oma-shell-exec-target)
        (end-of-buffer)
        (execute-kbd-macro (concat cmd "\r"))
@@ -330,10 +330,15 @@ buffer, if any, will be used."
 ;;    brew install cmake libtool  
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;;(package-initialize)
+;;(unless package-archive-contents
+;;  (package-refresh-contents))
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
 
 (use-package vterm
   :ensure t
@@ -341,7 +346,7 @@ buffer, if any, will be used."
   :custom
   (vterm-always-compile-module t)
   
-  ;;(setopt vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "M-x" "M-o" "C-y" "M-y" "C-q"))
+  (setopt vterm-keymap-exceptions '("C-c" "C-x" "C-u" "C-g" "C-h" "C-l" "C-v" "M-x" "M-o" "C-y" "M-y" "C-q"))
   (vterm-max-scrollback 100000)
   (vterm-kill-buffer-on-exit t)
   (vterm-copy-exclude-prompt t)
@@ -352,6 +357,20 @@ buffer, if any, will be used."
 (with-eval-after-load 'vterm
   (keymap-unset vterm-mode-map "C-q" t)
   (define-key vterm-mode-map (kbd "C-h") #'vterm-send-backspace))
+
+;;(with-eval-after-load 'vterm
+;;  (defun my/vterm-wheel-up ()
+;;    (interactive)
+;;    (vterm-send-string "\e[<64;1;1M"))   ; SGR wheel-up at col 1,row 1
+;;  (defun my/vterm-wheel-down ()
+;;    (interactive)
+;;    (vterm-send-string "\e[<65;1;1M"))   ; SGR wheel-down
+;;  (dolist (e '("<wheel-up>" "<double-wheel-up>" "<triple-wheel-up>"))
+;;    (define-key vterm-mode-map (kbd e) #'my/vterm-wheel-up))
+;;  (dolist (e '("<wheel-down>" "<double-wheel-down>" "<triple-wheel-down>"))
+;;    (define-key vterm-mode-map (kbd e) #'my/vterm-wheel-down)))
+
+
 
 (fringe-mode '(1 . 1))
 (set-face-attribute 'mode-line nil
@@ -396,9 +415,32 @@ buffer, if any, will be used."
   :ensure t
   :bind ("C-x g" . magit-status))
 
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" . markdown-mode)
+  :custom
+  (markdown-command "pandoc"))   ; hint: brew install pandoc
+
+;; Start server so that emacsclient works. Hint: alias e='emacsclient -n'
+
+(server-start)
+(setq server-window 'pop-to-buffer)
+
 ;;
 ;; Done
 ;;
 
 (message ".emacs completed")
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(magit markdown-mode markdown-preview-mode vterm)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
